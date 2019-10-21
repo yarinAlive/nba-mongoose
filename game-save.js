@@ -1,16 +1,13 @@
 const retrieveNbaDb = require('./mongodb-connect');
-const Game = require('./model/game');
+const GameRepository = require('./repositories/GameRepository');
 
 (async function () {
   await retrieveNbaDb();
-  const gameDoc = new Game(
-    {
-      home: '快艇',
-      away: '湖人',
-      homePoints: 121,
-      awayPoints: 67,
-    }
-  );
-
-  await gameDoc.save();
+  const gameRepository = GameRepository.createInstance();
+  await gameRepository.save({
+    home: '國王',
+    away: '老鷹',
+    homePoints: 121,
+    awayPoints: 67,
+  });
 })();
